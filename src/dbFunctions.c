@@ -4,7 +4,7 @@
 #include "dbFunctions.h"
 
 static sqlite3 *db;
-static *zErrMsg = 0;
+static int *zErrMsg = 0;
 static int rc;
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
@@ -16,14 +16,13 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 	return 0;
 }
 
-void createDatabase(char *dbName)
+void createDatabase(const char *dbName)
 {
 	char *sql;
 	rc = sqlite3_open(dbName, &db);
 	
 	if(rc) {
 		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-		return(0);
 	} else {
 		fprintf(stdout, "Opened database successfully\n");
 	}
@@ -43,11 +42,9 @@ void createDatabase(char *dbName)
 		fprintf(stdout, "Table created successfully\n");
 	}
 	sqlite3_close(db);
-	return 0;
-
 }
 
-void insertToDatabase(char *dbName)
+void insertToDatabase(const char *dbName)
 {
 
 	char *sql;
@@ -55,7 +52,6 @@ void insertToDatabase(char *dbName)
 	
 	if(rc) {
 		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-		return(0);
 	} else {
 		fprintf(stdout, "Opened database successfully\n");
 	}
@@ -72,6 +68,5 @@ void insertToDatabase(char *dbName)
 		fprintf(stdout, "Records created successfully\n");
 	}
 	sqlite3_close(db);
-	return 0;
 
 }
