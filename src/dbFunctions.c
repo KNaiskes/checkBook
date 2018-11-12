@@ -68,3 +68,26 @@ void insertToDatabase(const char *dbName, Check check)
 	sqlite3_close(db);
 
 }
+
+void deleteFromDatabase(const char *dbName, Check check)
+{
+	char *sql = sqlite3_mprintf("DELETE FROM CHECKS WHERE NUMBER = ('%q');",
+			check.Number);
+	rc = sqlite3_open(dbName, &db);
+
+	if(rc) {
+		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+		sqlite3_free(zErrMsg);
+	} else {
+		fprintf(stdout, "Opened database successfully\n");
+	}
+	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+	if(rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		fprintf(stdout, "Record deleted successfully\n");
+	}
+	sqlite3_close(db);
+}
