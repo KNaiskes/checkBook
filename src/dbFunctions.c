@@ -27,10 +27,10 @@ void createDatabase(const char *dbName)
 		fprintf(stdout, "Opened database successfully\n");
 	}
 	sql = "CREATE TABLE CHECKS("  \
-	      "ID INT PRIMARY KEY NOT NULL," \
-	      "RECIPIENT TEXT    NOT NULL," \
-	      "NUMBER CHAR(50) NOT NULL," \
-	      "AMOUNT REAL NOT NULL," \
+	      "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," \
+	      "RECIPIENT TEXT," \
+	      "NUMBER CHAR(50)," \
+	      "AMOUNT REAL," \
 	      "PAYDAY CHAR(50) );";
 
 	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
@@ -44,10 +44,12 @@ void createDatabase(const char *dbName)
 	sqlite3_close(db);
 }
 
-void insertToDatabase(const char *dbName)
+void insertToDatabase(const char *dbName, Check check)
 {
 
-	char *sql;
+	char *sql = sqlite3_mprintf("INSERT INTO CHECKS (RECIPIENT, NUMBER, AMOUNT, PAYDAY)"
+		       "VALUES ('%q','%q','%f','%q');"
+		       , check.Recipient, check.Number, check.Amount, check.Payday);
 	rc = sqlite3_open(dbName, &db);
 	
 	if(rc) {
@@ -55,10 +57,6 @@ void insertToDatabase(const char *dbName)
 	} else {
 		fprintf(stdout, "Opened database successfully\n");
 	}
-	 sql = "INSERT INTO CHECKS (ID, RECIPIENT, NUMBER, AMOUNT, PAYDAY)" \
-	         "VALUES (1, 'company1', '20-20-30', 1024, '19-04-04' ); " \
-	         "INSERT INTO CHECKS (ID,RECIPIENT,NUMBER,AMOUNT,PAYDAY)" \
-	         "VALUES (2, 'company2', '30-20-12',3503, '20-04-02' );";
 	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
 	if(rc != SQLITE_OK) {
