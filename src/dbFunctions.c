@@ -26,7 +26,7 @@ void createDatabase(const char *dbName)
 	} else {
 		fprintf(stdout, "Opened database successfully\n");
 	}
-	sql = "CREATE TABLE CHECKS("  \
+	sql = "CREATE TABLE IF NOT EXISTS CHECKS("  \
 	      "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," \
 	      "RECIPIENT TEXT," \
 	      "NUMBER CHAR(50)," \
