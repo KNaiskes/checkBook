@@ -13,10 +13,10 @@ int main(int argc, char *argv)
 
 	strcpy(dcheck.Number, "20-30-20-25");
 
-	strcpy(check.Recipient, "someName1");
-	strcpy(check.Number, "20-30-20-26");
-	check.Amount = 2032.33;
-	strcpy(check.Payday ,"2019-04-12");
+	strcpy(check.Recipient, "someNameX");
+	strcpy(check.Number, "20-30-20-23");
+	check.Amount = 1032.33;
+	strcpy(check.Payday ,"2019-04-11");
 
 
 	createDatabase(dbName);
@@ -24,7 +24,8 @@ int main(int argc, char *argv)
 
 	printf("Recipient: %s, number: %s, amount: %f, Payday: %s\n", check.Recipient,
 			check.Number, check.Amount, check.Payday);
-	deleteFromDatabase(dbName, dcheck);
+	//deleteFromDatabase(dbName, dcheck);
+	updateRecord(dbName, check);
 
 
 	return 0;

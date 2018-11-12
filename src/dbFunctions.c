@@ -91,3 +91,30 @@ void deleteFromDatabase(const char *dbName, Check check)
 	}
 	sqlite3_close(db);
 }
+
+void updateRecord(const char *dbName, Check check)
+{
+	char *sql = sqlite3_mprintf("UPDATE CHECKS SET RECIPIENT = ('%q'),"
+		       "NUMBER = ('%q'), AMOUNT = ('%f'), PAYDAY = ('%q')"
+		      "WHERE ID = (%d) ", 
+		      check.Recipient, check.Number, 
+		      check.Amount, check.Payday, 1);
+
+	rc = sqlite3_open(dbName, &db);
+
+	if(rc) {
+		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+		sqlite3_free(zErrMsg);
+	} else {
+		fprintf(stdout, "Opened database successfully\n");
+	}
+	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+
+	if(rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		fprintf(stdout, "Record was successfully updated\n");
+	}
+	sqlite3_close(db);
+}
