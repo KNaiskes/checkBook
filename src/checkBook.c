@@ -13,8 +13,8 @@ int main(int argc, char *argv)
 
 	strcpy(dcheck.Number, "20-30-20-25");
 
-	strcpy(check.Recipient, "someNameX");
-	strcpy(check.Number, "20-30-20-23");
+	strcpy(check.Recipient, "someNameY");
+	strcpy(check.Number, "20-30-20-50");
 	check.Amount = 1032.33;
 	strcpy(check.Payday ,"2019-04-11");
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv)
 	printf("Recipient: %s, number: %s, amount: %f, Payday: %s\n", check.Recipient,
 			check.Number, check.Amount, check.Payday);
 	//deleteFromDatabase(dbName, dcheck);
-	updateRecord(dbName, check);
+	updateRecord(dbName, check, "20-30-20-23");
 
 
 	return 0;

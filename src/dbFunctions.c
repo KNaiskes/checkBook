@@ -92,13 +92,13 @@ void deleteFromDatabase(const char *dbName, Check check)
 	sqlite3_close(db);
 }
 
-void updateRecord(const char *dbName, Check check)
+void updateRecord(const char *dbName, Check check, char *lookAmount)
 {
 	char *sql = sqlite3_mprintf("UPDATE CHECKS SET RECIPIENT = ('%q'),"
 		       "NUMBER = ('%q'), AMOUNT = ('%f'), PAYDAY = ('%q')"
-		      "WHERE ID = (%d) ", 
+		      "WHERE NUMBER = ('%s') ",
 		      check.Recipient, check.Number, 
-		      check.Amount, check.Payday, 1);
+		      check.Amount, check.Payday, lookAmount);
 
 	rc = sqlite3_open(dbName, &db);
 
