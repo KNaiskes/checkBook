@@ -9,8 +9,8 @@ typedef struct Checks {
 }Check;
 
 void createDatabase(const char *dbName);
-void insertToDatabase(const char *dbName, Check check);
-void deleteFromDatabase(const char *dbName, Check check);
+void insertRecord(const char *dbName, Check check);
+void deleteRecord(const char *dbName, Check check);
 void updateRecord(const char *dbName, Check check, char *lookAmount);
 
 #endif //DBFUNCTIONS_H_

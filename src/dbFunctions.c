@@ -44,7 +44,7 @@ void createDatabase(const char *dbName)
 	sqlite3_close(db);
 }
 
-void insertToDatabase(const char *dbName, Check check)
+void insertRecord(const char *dbName, Check check)
 {
 
 	char *sql = sqlite3_mprintf("INSERT INTO CHECKS (RECIPIENT, NUMBER, AMOUNT, PAYDAY)"
@@ -69,7 +69,7 @@ void insertToDatabase(const char *dbName, Check check)
 
 }
 
-void deleteFromDatabase(const char *dbName, Check check)
+void deleteRecord(const char *dbName, Check check)
 {
 	char *sql = sqlite3_mprintf("DELETE FROM CHECKS WHERE NUMBER = ('%q');",
 			check.Number);
