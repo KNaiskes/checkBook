@@ -2,12 +2,17 @@
 #include <string.h>
 
 #include "dbFunctions.h"
+#include "cli.h"
 
 int main(int argc, char *argv)
 {
+	/* testing */
+
+	mainMenu();
+
+	/*
 	const char *dbName = "test.db";
 
-	/* testing */
 	Check check;
 	Check dcheck;
 
@@ -27,6 +32,7 @@ int main(int argc, char *argv)
 	//deleteFromDatabase(dbName, dcheck);
 	updateRecord(dbName, check, "20-30-20-23");
 
+	*/
 
 	return 0;
 }
