@@ -9,7 +9,7 @@ typedef struct Checks {
 }Check;
 
 void createDatabase(const char *dbName);
-void insertRecord(const char *dbName, Check check);
+void addRecord(const char *dbName, Check check);
 void deleteRecord(const char *dbName, Check check);
 void updateRecord(const char *dbName, Check check, char *lookAmount);
 

@@ -44,7 +44,7 @@ void createDatabase(const char *dbName)
 	sqlite3_close(db);
 }
 
-void insertRecord(const char *dbName, Check check)
+void addRecord(const char *dbName, Check check)
 {
 
 	char *sql = sqlite3_mprintf("INSERT INTO CHECKS (RECIPIENT, NUMBER, AMOUNT, PAYDAY)"
