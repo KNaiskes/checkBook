@@ -2,9 +2,13 @@
 #include <ctype.h>
 
 #include "cli.h"
+#include "dbFunctions.h"
+
+const char *dbName;
 
 void mainMenu()
 {
+
 	char option;
 
 	printf("************************************************************\n"
@@ -22,7 +26,7 @@ void mainMenu()
 
 	switch(toupper(option)) {
 		case 'A':
-			printf("Have A\n");
+			addRecordMenu();
 			break;
 		case 'D':
 			printf("Have D\n");
@@ -36,8 +40,23 @@ void mainMenu()
 
 void addRecordMenu()
 {
+	Check addCheck;
+
 	printf("************************************************************\n"
-	       "* Add a new record					   *\n "
+	       "* Add a new record					   *\n"
 	       "************************************************************\n"
 	       "\n");
+	printf("Enter check's recipient: ");
+	scanf("%s", &addCheck.Recipient);
+
+	printf("\n Enter check's number: ");
+	scanf("%s", &addCheck.Number);
+
+	printf("\n Enter check's amount: ");
+	scanf("%lf", &addCheck.Amount);
+
+	printf("\n Enter check's payday: ");
+	scanf("%s", &addCheck.Payday);
+
+	addRecord(dbName, addCheck);
 }

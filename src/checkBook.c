@@ -6,9 +6,15 @@
 
 int main(int argc, char *argv)
 {
+	extern const char *dbName;
+	dbName = "checks.db";
+
 	/* testing */
 
+	createDatabase(dbName);
 	mainMenu();
+	//addRecordMenu();
+
 
 	/*
 	const char *dbName = "test.db";
