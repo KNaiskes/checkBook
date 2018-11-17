@@ -10,7 +10,7 @@ typedef struct Checks {
 
 void createDatabase(const char *dbName);
 void addRecord(const char *dbName, Check check);
-void deleteRecord(const char *dbName, Check check);
+void deleteRecord(const char *dbName, char *checkNumber);
 void updateRecord(const char *dbName, Check check, char *lookAmount);
 int recordExists(const char *dbName, char *checkNumber);
 

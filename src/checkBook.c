@@ -11,10 +11,7 @@ int main(int argc, char *argv)
 
 	/* testing */
 
-	//createDatabase(dbName);
-	//mainMenu();
-	//addRecordMenu();
-
+	mainMenu();
 
 	/*
 	const char *dbName = "test.db";

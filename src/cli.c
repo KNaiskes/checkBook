@@ -29,7 +29,7 @@ void mainMenu()
 			addRecordMenu();
 			break;
 		case 'D':
-			printf("Have D\n");
+			deleteRecordMenu();
 			break;
 		case 'U':
 			printf("Have U\n");
@@ -59,4 +59,25 @@ void addRecordMenu()
 	scanf("%s", &addCheck.Payday);
 
 	addRecord(dbName, addCheck);
+}
+
+void deleteRecordMenu()
+{
+	char checkNumber[12];
+
+	printf("************************************************************\n"
+	       "* Delete a record					   *\n"
+	       "************************************************************\n"
+	       "\n");
+	//TODO: print all the available records
+	printf("\nEnter check's number that you want to delete: ");
+	scanf("%s", checkNumber);
+
+	if(recordExists(dbName, checkNumber) == 0) {
+		deleteRecord(dbName, checkNumber);
+		printf("Record has successfully deleted!\n");
+	} else {
+		printf("There is no record with number: %s\n", checkNumber);
+	}
+
 }

@@ -3,6 +3,6 @@
 
 void mainMenu();
 void addRecordMenu();
-
+void deleteRecordMenu();
 
 #endif // CLI_H_

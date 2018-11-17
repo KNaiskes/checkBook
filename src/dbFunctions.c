@@ -69,10 +69,10 @@ void addRecord(const char *dbName, Check check)
 
 }
 
-void deleteRecord(const char *dbName, Check check)
+void deleteRecord(const char *dbName, char *checkNumber)
 {
 	char *sql = sqlite3_mprintf("DELETE FROM CHECKS WHERE NUMBER = ('%q');",
-			check.Number);
+			checkNumber);
 	rc = sqlite3_open(dbName, &db);
 
 	if(rc) {
