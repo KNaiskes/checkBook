@@ -11,8 +11,8 @@ int main(int argc, char *argv)
 
 	/* testing */
 
-	createDatabase(dbName);
-	mainMenu();
+	//createDatabase(dbName);
+	//mainMenu();
 	//addRecordMenu();
 
 

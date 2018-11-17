@@ -12,5 +12,6 @@ void createDatabase(const char *dbName);
 void addRecord(const char *dbName, Check check);
 void deleteRecord(const char *dbName, Check check);
 void updateRecord(const char *dbName, Check check, char *lookAmount);
+int recordExists(const char *dbName, char *checkNumber);
 
 #endif //DBFUNCTIONS_H_
