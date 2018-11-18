@@ -69,7 +69,13 @@ void deleteRecordMenu()
 	       "* Delete a record					   *\n"
 	       "************************************************************\n"
 	       "\n");
-	//TODO: print all the available records
+	printf("************************************************************\n"
+	       "* Available records					   *\n"
+	       "************************************************************\n"
+	       "\n");
+
+	listAllrecords(dbName);
+
 	printf("\nEnter check's number that you want to delete: ");
 	scanf("%s", checkNumber);
 
