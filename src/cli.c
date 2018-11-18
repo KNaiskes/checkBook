@@ -32,7 +32,7 @@ void mainMenu()
 			deleteRecordMenu();
 			break;
 		case 'U':
-			printf("Have U\n");
+			updateRecordMenu();
 			break;
 	}
 
@@ -85,5 +85,33 @@ void deleteRecordMenu()
 	} else {
 		printf("There is no record with number: %s\n", checkNumber);
 	}
+
+}
+
+void updateRecordMenu()
+{
+	char checkNumber[12];
+	Check checkUpdate;
+
+	printf("************************************************************\n"
+	       "* Delete a record					   *\n"
+	       "************************************************************\n"
+	       "\n");
+	printf("Enter check's number that you want to update: \n");
+	scanf("%s", checkNumber);
+
+	printf("Update recipient: \n");
+	scanf("%s", &checkUpdate.Recipient);
+
+	printf("Update number: \n");
+	scanf("%s", &checkUpdate.Number);
+
+	printf("Update amount: \n");
+	scanf("%f", &checkUpdate.Amount);
+
+	printf("Update payday: \n");
+	scanf("%s", &checkUpdate.Payday);
+
+	updateRecord(dbName, checkUpdate, checkNumber);
 
 }

@@ -4,5 +4,6 @@
 void mainMenu();
 void addRecordMenu();
 void deleteRecordMenu();
+void updateRecordMenu();
 
 #endif // CLI_H_
