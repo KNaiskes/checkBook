@@ -150,3 +150,25 @@ int recordExists(const char *dbName, char *checkNumber)
 
 	return exists;
 }
+
+void listAllrecords(char *dbName)
+{
+	rc = sqlite3_open(dbName, &db);
+	char *sql = "SELECT * FROM CHECKS";
+	char *err_msg = 0;
+
+
+	if(rc != SQLITE_OK) {
+		fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
+		sqlite3_close(db);
+	}
+
+	rc = sqlite3_exec(db, sql, callback, 0, &err_msg);
+
+	if(rc != SQLITE_OK) {
+		fprintf(stderr, "Failed to select records\n");
+		sqlite3_free(err_msg);
+		sqlite3_close(db);
+	}
+	sqlite3_close(db);
+}
