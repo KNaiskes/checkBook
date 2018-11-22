@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 
 #include "cli.h"
 #include "dbFunctions.h"
+
+#define RECIPIENTLEN 4
+#define NUMBERLEN 12
 
 const char *dbName;
 
@@ -53,13 +57,31 @@ void addRecordMenu()
 	       "************************************************************\n"
 	       "\n");
 	printf("Enter check's recipient: ");
-	scanf("%s", &addCheck.Recipient);
+	while(scanf("%s", &addCheck.Recipient)  == 1) {
+		if(strlen(addCheck.Recipient) < RECIPIENTLEN) {
+			printf("Recipient has to be at least 4 characters long\n");
+			printf("Try again!\n");
+			printf("> ");
+		} else break;
+	}
 
 	printf("\n Enter check's number: ");
-	scanf("%s", &addCheck.Number);
+	while(scanf("%s", &addCheck.Number) == 1) {
+		if(strlen(addCheck.Number) != NUMBERLEN) {
+			printf("Check number has to be 12 characters long\n");
+			printf("Try again!\n");
+			printf("> ");
+		} else break;
+	}
 
 	printf("\n Enter check's amount: ");
-	scanf("%lf", &addCheck.Amount);
+	while(scanf("%lf", &addCheck.Amount) == 1) {
+		if(addCheck.Amount <= 0) {
+			printf("Amount cannot be equal or less than zero \n");
+			printf("Try again\n");
+			printf("> ");
+		} else break;
+	}
 
 	printf("\n Enter check's payday: ");
 	scanf("%s", &addCheck.Payday);
@@ -69,7 +91,7 @@ void addRecordMenu()
 
 void deleteRecordMenu()
 {
-	char checkNumber[12];
+	char checkNumber[NUMBERLEN];
 
 	printf("************************************************************\n"
 	       "* Delete a record					   *\n"
@@ -83,7 +105,13 @@ void deleteRecordMenu()
 	listAllrecords(dbName);
 
 	printf("\nEnter check's number that you want to delete: ");
-	scanf("%s", checkNumber);
+	while(scanf("%s", checkNumber) == 1) {
+		if(strlen(checkNumber) != NUMBERLEN) {
+			printf("All check's numbers are 12 characters long\n");
+			printf("Try again!\n");
+			printf("> ");
+		} else break;
+	}
 
 	if(recordExists(dbName, checkNumber) == 0) {
 		deleteRecord(dbName, checkNumber);
@@ -96,7 +124,7 @@ void deleteRecordMenu()
 
 void updateRecordMenu()
 {
-	char checkNumber[12];
+	char checkNumber[NUMBERLEN];
 	Check checkUpdate;
 
 	printf("************************************************************\n"
@@ -104,16 +132,40 @@ void updateRecordMenu()
 	       "************************************************************\n"
 	       "\n");
 	printf("Enter check's number that you want to update: \n");
-	scanf("%s", checkNumber);
+	while(scanf("%s", checkNumber) == 1) {
+		if(strlen(checkNumber) != NUMBERLEN) {
+			printf("All check's numbers are 12 characters long\n");
+			printf("Try again!\n");
+			printf("> ");
+		} else break;
+	}
 
 	printf("Update recipient: \n");
-	scanf("%s", &checkUpdate.Recipient);
+	while(scanf("%s", &checkUpdate.Recipient) == 1) {
+		if(strlen(checkUpdate.Recipient) < RECIPIENTLEN) {
+			printf("Recipient has to be at least 4 characters long\n");
+			printf("Try again!\n");
+			printf("> ");
+		} else break;
+	}
 
 	printf("Update number: \n");
-	scanf("%s", &checkUpdate.Number);
+	while(scanf("%s", &checkUpdate.Number) == 1) {
+		if(strlen(checkUpdate.Number) != NUMBERLEN) {
+			printf("Check number has to be 12 characters long\n");
+			printf("Try again!\n");
+			printf("> ");
+		} else break;
+	}
 
 	printf("Update amount: \n");
-	scanf("%f", &checkUpdate.Amount);
+	while(scanf("%f", &checkUpdate.Amount) == 1) {
+		if(checkUpdate.Amount <= 0) {
+			printf("Amount cannot be equal or less than zero \n");
+			printf("Try again\n");
+			printf("> ");
+		} else break;
+	}
 
 	printf("Update payday: \n");
 	scanf("%s", &checkUpdate.Payday);
