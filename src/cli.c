@@ -11,31 +11,37 @@ void mainMenu()
 
 	char option;
 
-	printf("************************************************************\n"
-	       "* Welcome to Check Book Commanl Line Interface             *\n"
-	       "************************************************************\n"
-	       "\n");
-	printf("Enter:\n"
-			"A to add a new record \n"
-			"D to delete a record \n"
-			"U to update/change a record\n"
-	      );
+	do {
+		printf("************************************************************\n"
+		       "* Welcome to Check Book Commanl Line Interface             *\n"
+		       "************************************************************\n"
+		       "\n");
+		printf("Enter:\n"
+				"A to add a new record \n"
+				"D to delete a record \n"
+				"U to update/change a record\n"
+				"Q to exit the program\n"
+		      );
 
-	printf("> ");
-	option = getchar();
+		printf("> ");
+		option = getchar();
 
-	switch(toupper(option)) {
-		case 'A':
-			addRecordMenu();
-			break;
-		case 'D':
-			deleteRecordMenu();
-			break;
-		case 'U':
-			updateRecordMenu();
-			break;
-	}
-
+		switch(toupper(option)) {
+			case 'A':
+				addRecordMenu();
+				break;
+			case 'D':
+				deleteRecordMenu();
+				break;
+			case 'U':
+				updateRecordMenu();
+				break;
+			case 'Q':
+				break;
+			default:
+				printf("\nInvalid option. Try again!\n");
+		}
+	} while(toupper(option) != 'Q');
 }
 
 void addRecordMenu()
