@@ -23,9 +23,8 @@ void createDatabase(const char *dbName)
 	
 	if(rc) {
 		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-	} else {
-		fprintf(stdout, "Opened database successfully\n");
 	}
+
 	sql = "CREATE TABLE IF NOT EXISTS CHECKS("  \
 	      "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," \
 	      "RECIPIENT TEXT," \
@@ -38,9 +37,8 @@ void createDatabase(const char *dbName)
 	if(rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error: %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
-	} else {
-		fprintf(stdout, "Table created successfully\n");
 	}
+
 	sqlite3_close(db);
 }
 
@@ -54,17 +52,15 @@ void addRecord(const char *dbName, Check check)
 	
 	if(rc) {
 		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-	} else {
-		fprintf(stdout, "Opened database successfully\n");
 	}
+
 	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
 	if(rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error: %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
-	} else {
-		fprintf(stdout, "Records created successfully\n");
 	}
+
 	sqlite3_close(db);
 
 }
@@ -78,17 +74,15 @@ void deleteRecord(const char *dbName, char *checkNumber)
 	if(rc) {
 		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
 		sqlite3_free(zErrMsg);
-	} else {
-		fprintf(stdout, "Opened database successfully\n");
 	}
+
 	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
 	if(rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
-	} else {
-		fprintf(stdout, "Record deleted successfully\n");
 	}
+
 	sqlite3_close(db);
 }
 
@@ -105,17 +99,15 @@ void updateRecord(const char *dbName, Check check, char *lookAmount)
 	if(rc) {
 		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
 		sqlite3_free(zErrMsg);
-	} else {
-		fprintf(stdout, "Opened database successfully\n");
 	}
+
 	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
 	if(rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
-	} else {
-		fprintf(stdout, "Record was successfully updated\n");
 	}
+
 	sqlite3_close(db);
 }
 
