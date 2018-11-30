@@ -8,9 +8,10 @@
 int main(int argc, char *argv)
 {
 	extern const char *dbName;
-	dbName = "checks.db";
+	dbName = "db/checks.db";
 
 	if(!access(dbName, F_OK) != -1) {
+		mkdir("db/", 0700);
 		createDatabase(dbName);
 	}
 
