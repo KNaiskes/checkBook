@@ -13,163 +13,163 @@ const char *dbName;
 void mainMenu()
 {
 
-	char option;
+    char option;
 
-	do {
-		printf("************************************************************\n"
-		       "* Welcome to Check Book Commanl Line Interface             *\n"
-		       "************************************************************\n"
-		       "\n");
-		printf("Enter:\n"
-				"A to add a new record \n"
-				"D to delete a record \n"
-				"U to update/change a record\n"
-				"Q to exit the program\n"
-		      );
+    do {
+        printf("************************************************************\n"
+                "* Welcome to Check Book Commanl Line Interface             *\n"
+                "************************************************************\n"
+                "\n");
+        printf("Enter:\n"
+                "A to add a new record \n"
+                "D to delete a record \n"
+                "U to update/change a record\n"
+                "Q to exit the program\n"
+              );
 
-		printf("> ");
-		option = getchar();
+        printf("> ");
+        option = getchar();
 
-		switch(toupper(option)) {
-			case 'A':
-				addRecordMenu();
-				break;
-			case 'D':
-				deleteRecordMenu();
-				break;
-			case 'U':
-				updateRecordMenu();
-				break;
-			case 'Q':
-				break;
-			default:
-				printf("\nInvalid option. Try again!\n");
-		}
-	} while(toupper(option) != 'Q');
+        switch(toupper(option)) {
+            case 'A':
+                addRecordMenu();
+                break;
+            case 'D':
+                deleteRecordMenu();
+                break;
+            case 'U':
+                updateRecordMenu();
+                break;
+            case 'Q':
+                break;
+            default:
+                printf("\nInvalid option. Try again!\n");
+        }
+    } while(toupper(option) != 'Q');
 }
 
 void addRecordMenu()
 {
-	Check addCheck;
+    Check addCheck;
 
-	printf("************************************************************\n"
-	       "* Add a new record					   *\n"
-	       "************************************************************\n"
-	       "\n");
-	printf("Enter check's recipient: ");
-	while(scanf("%s", &addCheck.Recipient)  == 1) {
-		if(strlen(addCheck.Recipient) < RECIPIENTLEN) {
-			printf("Recipient has to be at least 4 characters long\n");
-			printf("Try again!\n");
-			printf("> ");
-		} else break;
-	}
+    printf("************************************************************\n"
+            "* Add a new record					   *\n"
+            "************************************************************\n"
+            "\n");
+    printf("Enter check's recipient: ");
+    while(scanf("%s", &addCheck.Recipient)  == 1) {
+        if(strlen(addCheck.Recipient) < RECIPIENTLEN) {
+            printf("Recipient has to be at least 4 characters long\n");
+            printf("Try again!\n");
+            printf("> ");
+        } else break;
+    }
 
-	printf("\n Enter check's number: ");
-	while(scanf("%s", &addCheck.Number) == 1) {
-		if(strlen(addCheck.Number) != NUMBERLEN) {
-			printf("Check number has to be 12 characters long\n");
-			printf("Try again!\n");
-			printf("> ");
-		} else break;
-	}
+    printf("\n Enter check's number: ");
+    while(scanf("%s", &addCheck.Number) == 1) {
+        if(strlen(addCheck.Number) != NUMBERLEN) {
+            printf("Check number has to be 12 characters long\n");
+            printf("Try again!\n");
+            printf("> ");
+        } else break;
+    }
 
-	printf("\n Enter check's amount: ");
-	while(scanf("%lf", &addCheck.Amount) == 1) {
-		if(addCheck.Amount <= 0) {
-			printf("Amount cannot be equal or less than zero \n");
-			printf("Try again\n");
-			printf("> ");
-		} else break;
-	}
+    printf("\n Enter check's amount: ");
+    while(scanf("%lf", &addCheck.Amount) == 1) {
+        if(addCheck.Amount <= 0) {
+            printf("Amount cannot be equal or less than zero \n");
+            printf("Try again\n");
+            printf("> ");
+        } else break;
+    }
 
-	printf("\n Enter check's payday: ");
-	scanf("%s", &addCheck.Payday);
+    printf("\n Enter check's payday: ");
+    scanf("%s", &addCheck.Payday);
 
-	addRecord(dbName, addCheck);
+    addRecord(dbName, addCheck);
 }
 
 void deleteRecordMenu()
 {
-	char checkNumber[NUMBERLEN];
+    char checkNumber[NUMBERLEN];
 
-	printf("************************************************************\n"
-	       "* Delete a record					   *\n"
-	       "************************************************************\n"
-	       "\n");
-	printf("************************************************************\n"
-	       "* Available records					   *\n"
-	       "************************************************************\n"
-	       "\n");
+    printf("************************************************************\n"
+            "* Delete a record					   *\n"
+            "************************************************************\n"
+            "\n");
+    printf("************************************************************\n"
+            "* Available records					   *\n"
+            "************************************************************\n"
+            "\n");
 
-	listAllrecords(dbName);
+    listAllrecords(dbName);
 
-	printf("\nEnter check's number that you want to delete: ");
-	while(scanf("%s", checkNumber) == 1) {
-		if(strlen(checkNumber) != NUMBERLEN) {
-			printf("All check's numbers are 12 characters long\n");
-			printf("Try again!\n");
-			printf("> ");
-		} else break;
-	}
+    printf("\nEnter check's number that you want to delete: ");
+    while(scanf("%s", checkNumber) == 1) {
+        if(strlen(checkNumber) != NUMBERLEN) {
+            printf("All check's numbers are 12 characters long\n");
+            printf("Try again!\n");
+            printf("> ");
+        } else break;
+    }
 
-	if(recordExists(dbName, checkNumber) == 0) {
-		deleteRecord(dbName, checkNumber);
-		printf("Record has successfully deleted!\n");
-	} else {
-		printf("There is no record with number: %s\n", checkNumber);
-	}
+    if(recordExists(dbName, checkNumber) == 0) {
+        deleteRecord(dbName, checkNumber);
+        printf("Record has successfully deleted!\n");
+    } else {
+        printf("There is no record with number: %s\n", checkNumber);
+    }
 
 }
 
 void updateRecordMenu()
 {
-	char checkNumber[NUMBERLEN];
-	Check checkUpdate;
+    char checkNumber[NUMBERLEN];
+    Check checkUpdate;
 
-	printf("************************************************************\n"
-	       "* Delete a record					   *\n"
-	       "************************************************************\n"
-	       "\n");
-	printf("Enter check's number that you want to update: \n");
-	while(scanf("%s", checkNumber) == 1) {
-		if(strlen(checkNumber) != NUMBERLEN) {
-			printf("All check's numbers are 12 characters long\n");
-			printf("Try again!\n");
-			printf("> ");
-		} else break;
-	}
+    printf("************************************************************\n"
+            "* Delete a record					   *\n"
+            "************************************************************\n"
+            "\n");
+    printf("Enter check's number that you want to update: \n");
+    while(scanf("%s", checkNumber) == 1) {
+        if(strlen(checkNumber) != NUMBERLEN) {
+            printf("All check's numbers are 12 characters long\n");
+            printf("Try again!\n");
+            printf("> ");
+        } else break;
+    }
 
-	printf("Update recipient: \n");
-	while(scanf("%s", &checkUpdate.Recipient) == 1) {
-		if(strlen(checkUpdate.Recipient) < RECIPIENTLEN) {
-			printf("Recipient has to be at least 4 characters long\n");
-			printf("Try again!\n");
-			printf("> ");
-		} else break;
-	}
+    printf("Update recipient: \n");
+    while(scanf("%s", &checkUpdate.Recipient) == 1) {
+        if(strlen(checkUpdate.Recipient) < RECIPIENTLEN) {
+            printf("Recipient has to be at least 4 characters long\n");
+            printf("Try again!\n");
+            printf("> ");
+        } else break;
+    }
 
-	printf("Update number: \n");
-	while(scanf("%s", &checkUpdate.Number) == 1) {
-		if(strlen(checkUpdate.Number) != NUMBERLEN) {
-			printf("Check number has to be 12 characters long\n");
-			printf("Try again!\n");
-			printf("> ");
-		} else break;
-	}
+    printf("Update number: \n");
+    while(scanf("%s", &checkUpdate.Number) == 1) {
+        if(strlen(checkUpdate.Number) != NUMBERLEN) {
+            printf("Check number has to be 12 characters long\n");
+            printf("Try again!\n");
+            printf("> ");
+        } else break;
+    }
 
-	printf("Update amount: \n");
-	while(scanf("%f", &checkUpdate.Amount) == 1) {
-		if(checkUpdate.Amount <= 0) {
-			printf("Amount cannot be equal or less than zero \n");
-			printf("Try again\n");
-			printf("> ");
-		} else break;
-	}
+    printf("Update amount: \n");
+    while(scanf("%f", &checkUpdate.Amount) == 1) {
+        if(checkUpdate.Amount <= 0) {
+            printf("Amount cannot be equal or less than zero \n");
+            printf("Try again\n");
+            printf("> ");
+        } else break;
+    }
 
-	printf("Update payday: \n");
-	scanf("%s", &checkUpdate.Payday);
+    printf("Update payday: \n");
+    scanf("%s", &checkUpdate.Payday);
 
-	updateRecord(dbName, checkUpdate, checkNumber);
+    updateRecord(dbName, checkUpdate, checkNumber);
 
 }

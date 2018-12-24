@@ -7,15 +7,15 @@
 
 int main(int argc, char *argv)
 {
-	extern const char *dbName;
-	dbName = "db/checks.db";
+    extern const char *dbName;
+    dbName = "db/checks.db";
 
-	if(!access(dbName, F_OK) != -1) {
-		mkdir("db/", 0700);
-		createDatabase(dbName);
-	}
+    if(!access(dbName, F_OK) != -1) {
+        mkdir("db/", 0700);
+        createDatabase(dbName);
+    }
 
-	mainMenu();
+    mainMenu();
 
-	return 0;
+    return 0;
 }
