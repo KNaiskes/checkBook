@@ -1,5 +1,6 @@
 #include <sqlite3.h>
 #include <stdio.h>
+#include "logFile.h"
 
 #include "dbFunctions.h"
 
@@ -35,7 +36,7 @@ void createDatabase(const char *dbName)
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
     if(rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        LogMsg(zErrMsg);
         sqlite3_free(zErrMsg);
     }
 
@@ -51,13 +52,13 @@ void addRecord(const char *dbName, Check check)
     rc = sqlite3_open(dbName, &db);
 
     if(rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        LogMsg(sqlite3_errmsg(db));
     }
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
     if(rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error: %s\n", zErrMsg);
+        LogMsg(zErrMsg);
         sqlite3_free(zErrMsg);
     }
 
@@ -72,14 +73,14 @@ void deleteRecord(const char *dbName, char *checkNumber)
     rc = sqlite3_open(dbName, &db);
 
     if(rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        LogMsg(sqlite3_errmsg(db));
         sqlite3_free(zErrMsg);
     }
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
     if(rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error %s\n", zErrMsg);
+        LogMsg(zErrMsg);
         sqlite3_free(zErrMsg);
     }
 
@@ -97,14 +98,14 @@ void updateRecord(const char *dbName, Check check, char *lookAmount)
     rc = sqlite3_open(dbName, &db);
 
     if(rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+        LogMsg(sqlite3_errmsg(db));
         sqlite3_free(zErrMsg);
     }
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
     if(rc != SQLITE_OK) {
-        fprintf(stderr, "SQL error %s\n", zErrMsg);
+        LogMsg(zErrMsg);
         sqlite3_free(zErrMsg);
     }
 
@@ -122,8 +123,7 @@ int recordExists(const char *dbName, char *checkNumber)
     rc = sqlite3_open(dbName, &db);
 
     if(rc != SQLITE_OK) {
-        fprintf(stderr, "Cannot open database in the check function: %s\n",
-                sqlite3_errmsg(db));
+        LogMsg(sqlite3_errmsg(db));
         sqlite3_close(db);
     }
 
@@ -149,16 +149,15 @@ void listAllrecords(char *dbName)
     char *sql = "SELECT * FROM CHECKS";
     char *err_msg = 0;
 
-
     if(rc != SQLITE_OK) {
-        fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
+        LogMsg(sqlite3_errmsg(db));
         sqlite3_close(db);
     }
 
     rc = sqlite3_exec(db, sql, callback, 0, &err_msg);
 
     if(rc != SQLITE_OK) {
-        fprintf(stderr, "Failed to select records\n");
+        LogMsg(sqlite3_errmsg(db));
         sqlite3_free(err_msg);
         sqlite3_close(db);
     }
