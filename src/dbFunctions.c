@@ -22,15 +22,11 @@ void createDatabase(const char *dbName)
     char *sql;
     rc = sqlite3_open(dbName, &db);
 
-    if(rc) {
-        fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-    }
-
-    sql = "CREATE TABLE IF NOT EXISTS CHECKS("  \
-           "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," \
-           "RECIPIENT TEXT," \
-           "NUMBER CHAR(50)," \
-           "AMOUNT REAL," \
+    sql = "CREATE TABLE IF NOT EXISTS CHECKS("
+           "ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+           "RECIPIENT TEXT,"
+           "NUMBER CHAR(50),"
+           "AMOUNT REAL,"
            "PAYDAY CHAR(50) );";
 
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);

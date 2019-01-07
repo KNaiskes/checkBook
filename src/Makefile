@@ -16,4 +16,5 @@ logFile.o: logFile.c
 
 clean:
 	rm *.o checkbook
-	rm logs.log
+	rm -f logs.log
+	rm -rf db/
