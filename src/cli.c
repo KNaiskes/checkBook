@@ -128,7 +128,7 @@ void updateRecordMenu()
     Check checkUpdate;
 
     printf("************************************************************\n"
-            "* Delete a record					   *\n"
+            "* Update record					   *\n"
             "************************************************************\n"
             "\n");
     printf("Enter check's number that you want to update: \n");
