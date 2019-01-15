@@ -7,6 +7,7 @@
 
 #define RECIPIENTLEN 4
 #define NUMBERLEN 12
+#define STRINGBUFFER 50
 
 const char *dbName;
 
@@ -56,8 +57,9 @@ void addRecordMenu()
             "* Add a new record					   *\n"
             "************************************************************\n"
             "\n");
+    while((getchar()) != '\n'); // clear input buffer
     printf("Enter check's recipient: ");
-    while(scanf("%s", &addCheck.Recipient)  == 1) {
+    while(fgets(addCheck.Recipient, STRINGBUFFER, stdin)  == 1) {
         if(strlen(addCheck.Recipient) < RECIPIENTLEN) {
             printf("Recipient has to be at least 4 characters long\n");
             printf("Try again!\n");
@@ -140,8 +142,9 @@ void updateRecordMenu()
         } else break;
     }
 
+    while((getchar()) != '\n'); // clear input buffer
     printf("Update recipient: \n");
-    while(scanf("%s", &checkUpdate.Recipient) == 1) {
+    while(fgets(checkUpdate.Recipient, STRINGBUFFER, stdin) == 1) {
         if(strlen(checkUpdate.Recipient) < RECIPIENTLEN) {
             printf("Recipient has to be at least 4 characters long\n");
             printf("Try again!\n");
