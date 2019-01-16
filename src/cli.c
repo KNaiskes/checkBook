@@ -25,6 +25,7 @@ void mainMenu()
                 "A to add a new record \n"
                 "D to delete a record \n"
                 "U to update/change a record\n"
+                "L to list all available records\n"
                 "Q to exit the program\n"
               );
 
@@ -42,6 +43,13 @@ void mainMenu()
                 updateRecordMenu();
                 break;
             case 'Q':
+                break;
+            case 'L':
+                printf("*************************\n"
+                        "* Available records     *\n"
+                        "*************************\n");
+                listAllrecords(dbName);
+                while((getchar()) != '\n'); // clear input buffer
                 break;
             default:
                 printf("\nInvalid option. Try again!\n");
@@ -133,6 +141,13 @@ void updateRecordMenu()
             "* Update record					   *\n"
             "************************************************************\n"
             "\n");
+    printf("************************************************************\n"
+            "* Available records					   *\n"
+            "************************************************************\n"
+            "\n");
+
+    listAllrecords(dbName);
+
     printf("Enter check's number that you want to update: \n");
     while(scanf("%s", checkNumber) == 1) {
         if(strlen(checkNumber) != NUMBERLEN) {
