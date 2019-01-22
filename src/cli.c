@@ -95,6 +95,7 @@ void addRecordMenu()
 
     printf("\n Enter check's payday: ");
     scanf("%s", &addCheck.Payday);
+    while((getchar()) != '\n'); // clear input buffer
 
     addRecord(dbName, addCheck);
 }
@@ -129,7 +130,6 @@ void deleteRecordMenu()
     } else {
         printf("There is no record with number: %s\n", checkNumber);
     }
-
 }
 
 void updateRecordMenu()
